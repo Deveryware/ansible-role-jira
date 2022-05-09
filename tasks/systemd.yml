@@ -1,0 +1,19 @@
+---
+- name: Jira - Ensure service script is present.
+  become: true
+  template:
+    src:  "jira.systemd.j2"
+    dest: "/lib/systemd/system/jira.service"
+    owner: root
+    group: root
+    mode: 0644
+- name: Jira - Ensure service is linked into /etc/systemd.
+  file:
+    src: "/lib/systemd/system/jira.service"
+    dest: "/etc/systemd/system/jira.service"
+    state: link
+- name: Jira - Ensure service is linked into /etc/systemd/multi-user.target.wants.
+  file:
+    src: "/lib/systemd/system/jira.service"
+    dest: "/etc/systemd/system/multi-user.target.wants/jira.service"
+    state: link

@@ -12,3 +12,4 @@
     shell: /bin/bash
     state: present
 
+- include_tasks: systemd.yml
