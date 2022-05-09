@@ -10,4 +10,7 @@
     owner: "{{ jira_user }}"
     group: "{{ jira_group }}"
     copy: no
-
+- name: Jira - Remove downloaded file.
+  file:
+    path: "{{ Jira_home }}/jira.tar.gz"
+    state: absent
