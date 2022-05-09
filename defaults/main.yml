@@ -4,6 +4,7 @@ jira_group: "{{ jira_user }}"
 jira_home: '/opt/atlassian/jira'
 jira_app_dir: "{{ jira_home }}/application"
 jira_current_dir: "{{ jira_home }}/application/current"
+jira_data_dir: "{{ jira_home }}/data"
 
 jira_version: '8.22.2'
 jira_download_url: "https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-{{ jira_version }}.tar.gz"

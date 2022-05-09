@@ -28,3 +28,13 @@
 
 - include_tasks: configuration.yml
 - include_tasks: systemd.yml
+
+- name: Jira - Ensure jira ownership.
+  file:
+    path: "{{ item }}"
+    owner: "{{ jira_user }}"
+    group: "{{ jira_group }}"
+    recurse: yes
+  loop:
+    - "{{ jira_app_dir }}"
+    - "{{ jira_data_dir }}"
