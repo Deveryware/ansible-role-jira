@@ -12,6 +12,12 @@
     shell: /bin/bash
     state: present
 
+- name: Jira - Add current symlink to the installed version.
+  file:
+    src: "{{ jira_home }}/atlassian-jira-core-{{ jira_version }}-standalone"
+    dest: "{{ jira_home }}/current"
+    state: link
+
 - name: Jira - Check if Jira is installed.
   stat:
     path: "{{ Jira_home }}/current/atlassian-jira/WEB-INF/lib/jira-api-{{ jira_version }}.jar"
