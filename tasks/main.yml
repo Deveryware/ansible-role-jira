@@ -7,20 +7,20 @@
   user:
     name: "{{ jira_user }}"
     group: "{{ jira_group }}"
-    home: "{{ jira_home }}"
+    home: "{{ jira_app_dir }}"
     comment: 'Jira account'
     shell: /bin/bash
     state: present
 
 - name: Jira - Add current symlink to the installed version.
   file:
-    src: "{{ jira_home }}/atlassian-jira-core-{{ jira_version }}-standalone"
-    dest: "{{ jira_home }}/current"
+    src: "{{ jira_app_dir }}/atlassian-jira-core-{{ jira_version }}-standalone"
+    dest: "{{ jira_current_dir }}"
     state: link
 
 - name: Jira - Check if Jira is installed.
   stat:
-    path: "{{ Jira_home }}/current/atlassian-jira/WEB-INF/lib/jira-api-{{ jira_version }}.jar"
+    path: "{{ Jira_current_dir }}/atlassian-jira/WEB-INF/lib/jira-api-{{ jira_version }}.jar"
   register: jira_installed
 
 - include_tasks: download.yml

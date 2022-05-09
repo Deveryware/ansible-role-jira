@@ -1,27 +1,27 @@
 ---
 - name: Jira configuration - Ensure home location is set in properties.
   lineinfile:
-    dest: "{{ jira_home }}/current/atlassian-jira/WEB-INF/classes/jira-application.properties"
+    dest: "{{ jira_current_dir }}/atlassian-jira/WEB-INF/classes/jira-application.properties"
     regexp: '^jira.home ='
-    line: "jira.home = {{ jira_home }}"
+    line: "jira.home = {{ jira_current_dir }}"
     create: yes
     state: present
 - name: Jira configuration - Ensure minimum memory is set.
   lineinfile:
-    dest: "{{ jira_home }}/current/bin/setenv.sh"
+    dest: "{{ jira_current_dir }}/bin/setenv.sh"
     regexp: '^JVM_MINIMUM_MEMORY'
     line: "JVM_MINIMUM_MEMORY={{ jira_xms }}"
     state: present
 - name: Jira configuration - Ensure maximum memory is set.
   lineinfile:
-    dest: "{{ jira_home }}/current/bin/setenv.sh"
+    dest: "{{ jira_current_dir }}/bin/setenv.sh"
     regexp: '^JVM_MAXIMUM_MEMORY'
     line: "JVM_MAXIMUM_MEMORY={{ jira_xmx }}"
     state: present
 
 - name: Jira configuration - Ensure java extra args are set.
   lineinfile:
-    dest: "{{ jira_home }}/current/bin/setenv.sh"
+    dest: "{{ jira_current_dir }}/bin/setenv.sh"
     regexp: '^JVM_REQUIRED_ARGS=${JVM_REQUIRED_ARGS}'
     line: 'JVM_REQUIRED_ARGS=${JVM_REQUIRED_ARGS} {{ jira_java_extra_args }}'
     insertafter: '^JVM_REQUIRED_ARGS=-D'
