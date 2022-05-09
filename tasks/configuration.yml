@@ -18,3 +18,12 @@
     regexp: '^JVM_MAXIMUM_MEMORY'
     line: "JVM_MAXIMUM_MEMORY={{ jira_xmx }}"
     state: present
+
+- name: Jira configuration - Ensure java extra args are set.
+  lineinfile:
+    dest: "{{ jira_home }}/current/bin/setenv.sh"
+    regexp: '^JVM_REQUIRED_ARGS=${JVM_REQUIRED_ARGS}'
+    line: 'JVM_REQUIRED_ARGS=${JVM_REQUIRED_ARGS} {{ jira_java_extra_args }}'
+    insertafter: '^JVM_REQUIRED_ARGS=-D'
+    insertbefore: '^JAVA_OPTS='
+  when: jira_java_extra_args is defined
