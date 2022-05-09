@@ -6,3 +6,15 @@
     line: "jira.home = {{ jira_home }}"
     create: yes
     state: present
+- name: Jira configuration - Ensure minimum memory is set.
+  lineinfile:
+    dest: "{{ jira_home }}/current/bin/setenv.sh"
+    regexp: '^JVM_MINIMUM_MEMORY'
+    line: "JVM_MINIMUM_MEMORY={{ jira_xms }}"
+    state: present
+- name: Jira configuration - Ensure maximum memory is set.
+  lineinfile:
+    dest: "{{ jira_home }}/current/bin/setenv.sh"
+    regexp: '^JVM_MAXIMUM_MEMORY'
+    line: "JVM_MAXIMUM_MEMORY={{ jira_xmx }}"
+    state: present

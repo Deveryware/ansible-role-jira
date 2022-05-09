@@ -5,3 +5,6 @@ jira_home: '/opt/atlassian/jira/application'
 
 jira_version: '8.22.2'
 jira_download_url: "https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-{{ jira_version }}.tar.gz"
+
+jira_xms: "384m"
+jira_xmx: "2048m"
