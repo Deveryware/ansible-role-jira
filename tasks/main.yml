@@ -1,0 +1,14 @@
+---
+- name: Jira - Ensure jira group is present.
+  group:
+    name: "{{ jira_group }}"
+    state: present
+- name: Jira - Ensure jira user is present.
+  user:
+    name: "{{ jira_user }}"
+    group: "{{ jira_group }}"
+    home: "{{ jira_home }}"
+    comment: 'Jira account'
+    shell: /bin/bash
+    state: present
+
