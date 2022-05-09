@@ -12,4 +12,12 @@
     shell: /bin/bash
     state: present
 
+- name: Jira - Check if Jira is installed.
+  stat:
+    path: "{{ Jira_home }}/current/atlassian-jira/WEB-INF/lib/jira-api-{{ jira_version }}.jar"
+  register: jira_installed
+
+- include_tasks: download.yml
+  when: jira_installed.stat.exists == false
+
 - include_tasks: systemd.yml

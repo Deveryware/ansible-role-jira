@@ -1,0 +1,13 @@
+---
+- name: Jira - Download Jira.
+  get_url:
+    url: "{{ jira_download_url }}"
+    dest: "{{ Jira_home }}/jira.tar.gz"
+- name: Jira - Uncompress downloaded file.
+  unarchive:
+    src: "{{ Jira_home }}/jira.tar.gz"
+    dest: "{{ jira_home }}"
+    owner: "{{ jira_user }}"
+    group: "{{ jira_group }}"
+    copy: no
+
