@@ -9,6 +9,11 @@ Environment=JAVA_HOME=/usr/bin
 ExecStart={{ jira_home }}/current/bin/start-jira.sh
 ExecStop={{ jira_home }}/current/bin/stop-jira.sh
 ExecReload={{ jira_home }}/current/bin/stop-jira.sh | sleep 60 | {{ jira_home }}/current/bin/start-jira.sh
+{% if jira_env_vars is defined %}
+{% for kv in jira_env_vars %}
+Environment="{{ kv.key }}={{ kv.value }}"
+{% endfor %}
+{% endif %}
 LimitNOFILE=4096
 LimitNPROC=4096
 
