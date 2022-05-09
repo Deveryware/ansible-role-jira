@@ -1,0 +1,8 @@
+---
+- name: Jira configuration - Ensure home location is set in properties.
+  lineinfile:
+    dest: "{{ jira_home }}/current/atlassian-jira/WEB-INF/classes/jira-application.properties"
+    regexp: '^jira.home ='
+    line: "jira.home = {{ jira_home }}"
+    create: yes
+    state: present

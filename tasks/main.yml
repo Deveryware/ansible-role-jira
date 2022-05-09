@@ -26,4 +26,5 @@
 - include_tasks: download.yml
   when: jira_installed.stat.exists == false
 
+- include_tasks: configuration.yml
 - include_tasks: systemd.yml
