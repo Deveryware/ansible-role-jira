@@ -31,6 +31,17 @@
 - include_tasks: configuration.yml
 - include_tasks: systemd.yml
 
+- name: Jira - Ensure logs are available in /var/log.
+  file:
+    src: "{{ item.src }}"
+    dest: "/var/log/{{ item.dest }}"
+    group: "{{ jira_group }}"
+    force: True
+    state: link
+  loop:
+    - { src: "{{ jira_data_dir }}/log/",      dest: "jira_data"}
+    - { src: "{{ jira_current_dir }}/logs/",  dest: "jira_app"}
+
 - name: Jira - Ensure jira ownership.
   file:
     path: "{{ item }}"
