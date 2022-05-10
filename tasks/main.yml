@@ -51,3 +51,8 @@
   loop:
     - "{{ jira_app_dir }}"
     - "{{ jira_data_dir }}"
+
+- name: Jira - Ensure Jira service is started
+  service:
+    name: jira
+    state: started
