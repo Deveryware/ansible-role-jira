@@ -30,3 +30,22 @@
     insertbefore: '^JAVA_OPTS='
   notify: restart jira service
   when: jira_java_extra_args is defined
+
+- name: Jira configuration - Ensure server.xml prerequisites are installed.
+  apt:
+    package: 'python3-lxml'
+    state: present
+  when: jira_public_url is defined
+
+- name: Jira configuration - Ensure server.xml is set.
+  community.general.xml:
+    path: "{{ jira_current_dir }}/conf/server.xml"
+    xpath: "/Server/Service/Connector"
+    attribute: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop:
+    - { key: "scheme", value: "https"}
+    - { key: "proxyName" , value: "{{ jira_public_url }}"}
+    - { key: "proxyPort", value: "443"}
+  notify: restart jira service
+  when: jira_public_url is defined
