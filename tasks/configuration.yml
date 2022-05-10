@@ -3,7 +3,7 @@
   lineinfile:
     dest: "{{ jira_current_dir }}/atlassian-jira/WEB-INF/classes/jira-application.properties"
     regexp: '^jira.home ='
-    line: "jira.home = {{ jira_current_dir }}"
+    line: "jira.home = {{ jira_data_dir }}"
     create: yes
     state: present
 - name: Jira configuration - Ensure minimum memory is set.
