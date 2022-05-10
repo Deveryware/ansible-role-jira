@@ -6,18 +6,21 @@
     line: "jira.home = {{ jira_data_dir }}"
     create: yes
     state: present
+  notify: restart jira service
 - name: Jira configuration - Ensure minimum memory is set.
   lineinfile:
     dest: "{{ jira_current_dir }}/bin/setenv.sh"
     regexp: '^JVM_MINIMUM_MEMORY'
     line: "JVM_MINIMUM_MEMORY={{ jira_xms }}"
     state: present
+  notify: restart jira service
 - name: Jira configuration - Ensure maximum memory is set.
   lineinfile:
     dest: "{{ jira_current_dir }}/bin/setenv.sh"
     regexp: '^JVM_MAXIMUM_MEMORY'
     line: "JVM_MAXIMUM_MEMORY={{ jira_xmx }}"
     state: present
+  notify: restart jira service
 
 - name: Jira configuration - Ensure java extra args are set.
   lineinfile:
@@ -25,4 +28,5 @@
     regexp: '^JVM_REQUIRED_ARGS=${JVM_REQUIRED_ARGS}'
     line: 'JVM_REQUIRED_ARGS="${JVM_REQUIRED_ARGS} {{ jira_java_extra_args }}"'
     insertbefore: '^JAVA_OPTS='
+  notify: restart jira service
   when: jira_java_extra_args is defined
