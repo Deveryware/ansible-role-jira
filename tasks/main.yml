@@ -24,6 +24,8 @@
   file:
     src: "{{ jira_app_dir }}/atlassian-jira-software-{{ jira_version }}-standalone"
     dest: "{{ jira_current_dir }}"
+    owner: "{{ jira_user }}"
+    group: "{{ jira_group }}"
     state: link
 
 - include_tasks: configuration.yml
