@@ -14,7 +14,7 @@
 
 - name: Jira - Add current symlink to the installed version.
   file:
-    src: "{{ jira_app_dir }}/atlassian-jira-core-{{ jira_version }}-standalone"
+    src: "{{ jira_app_dir }}/atlassian-jira-software-{{ jira_version }}-standalone"
     dest: "{{ jira_current_dir }}"
     state: link
 
