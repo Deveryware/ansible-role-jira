@@ -23,6 +23,6 @@
   lineinfile:
     dest: "{{ jira_current_dir }}/bin/setenv.sh"
     regexp: '^JVM_REQUIRED_ARGS=${JVM_REQUIRED_ARGS}'
-    line: 'JVM_REQUIRED_ARGS=${JVM_REQUIRED_ARGS} {{ jira_java_extra_args }}'
+    line: 'JVM_REQUIRED_ARGS="${JVM_REQUIRED_ARGS} {{ jira_java_extra_args }}"'
     insertbefore: '^JAVA_OPTS='
   when: jira_java_extra_args is defined
