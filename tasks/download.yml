@@ -3,6 +3,7 @@
   get_url:
     url: "{{ jira_download_url }}"
     dest: "{{ jira_app_dir }}/jira.tar.gz"
+    tmp_dest: "{{ jira_tmp_dest | default(jira_app_dir) }}"
 - name: Jira - Uncompress downloaded file.
   unarchive:
     src: "{{ jira_app_dir }}/jira.tar.gz"
