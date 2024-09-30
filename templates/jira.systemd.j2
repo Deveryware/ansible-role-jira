@@ -15,7 +15,7 @@ Environment="{{ kv.key }}={{ kv.value }}"
 {% endfor %}
 {% endif %}
 LimitNOFILE=4096
-LimitNPROC=4096
+LimitNPROC=1024
 
 [Install]
 WantedBy=multi-user.target
