@@ -3,5 +3,15 @@
   systemd:
     name: "jira"
     state: restarted
-    daemon_reload: true
-    enabled: true
+
+- name: stop jira service
+  systemd:
+    name: "jira"
+    state: stop
+
+- name: start jira service
+  systemd:
+    name: "jira"
+    state: started
+    daemon_reload: "{{ jira_systemd_daemon_reload }}"
+    enabled: "{{ jira_systemd_enable }}"
